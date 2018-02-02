@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavie", "Lavie\Lavie.csproj", "{5F5C724D-B67F-440E-BC20-D257C19AA2D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavie.Web", "Lavie.Web\Lavie.Web.csproj", "{5080EA09-AB49-4EAF-93ED-83319A503E4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lavie", "Lavie\Lavie.csproj", "{25BC9AE1-7178-4915-805F-D591557CCACC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F5C724D-B67F-440E-BC20-D257C19AA2D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F5C724D-B67F-440E-BC20-D257C19AA2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F5C724D-B67F-440E-BC20-D257C19AA2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F5C724D-B67F-440E-BC20-D257C19AA2D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5080EA09-AB49-4EAF-93ED-83319A503E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5080EA09-AB49-4EAF-93ED-83319A503E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5080EA09-AB49-4EAF-93ED-83319A503E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5080EA09-AB49-4EAF-93ED-83319A503E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25BC9AE1-7178-4915-805F-D591557CCACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25BC9AE1-7178-4915-805F-D591557CCACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25BC9AE1-7178-4915-805F-D591557CCACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25BC9AE1-7178-4915-805F-D591557CCACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
