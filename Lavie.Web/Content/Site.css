@@ -1,0 +1,134 @@
+﻿body {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-family: "Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Set padding to keep content from hitting the edges */
+.header-content,
+.body-content,
+.footer-content {
+    padding: 0;
+    width: 1024px;
+    margin: 0 auto;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.navbar {
+    border-width: 0;
+}
+/* 导航 */
+.navbar-nav {
+    padding: 40px 0 20px 20px;
+}
+
+.navbar-inverse {
+    background-color: #fff;
+}
+
+.navbar-fixed-top {
+    border-width: 0;
+}
+
+.nav > li {
+    width: 110px;
+    text-align: center;
+}
+
+    .nav > li:hover {
+        background-color: #eee;
+    }
+
+        .nav > li:hover > a:hover {
+            color: #000;
+        }
+
+    .nav > li > a {
+        padding: 10px;
+    }
+
+        .nav > li > a:hover,
+        .nav > li > a:focus {
+            color: #000;
+            background-color: #cf212d;
+        }
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #000;
+    font-size: 18px;
+}
+
+.navbar-inverse .navbar-nav > li.ac {
+    background-color: #cf212d;
+}
+
+    .navbar-inverse .navbar-nav > li.ac > a {
+        color: #fff;
+    }
+
+.login {
+    width: 424px;
+    height: 360px;
+    margin: 0 auto;
+    background: url(/Content/Images/LoginInputBG.png) no-repeat right center;
+}
+    /*
+    .login.forget {
+        background: url(forget.png) no-repeat right center;
+    }
+*/
+    .login ul {
+        width: 424px;
+        height: 360px;
+        padding: 128px 0 0 96px;
+        *padding: 128px 0 0 56px;
+    }
+
+        .login ul li {
+            width: 424px;
+            height: 64px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .login ul li.tips {
+            height: 40px;
+        }
+
+#ValidationUsername,
+#ValidationPassword {
+    width: 300px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0;
+    border-width: 0;
+    display: block;
+    outline: none;
+}
+
+#sm {
+    width: 240px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #cf212d;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    font-size: 18px;
+}
+
+    #sm:hover {
+        background-color: #f00;
+    }
+
+#tips {
+    color: #f00;
+}

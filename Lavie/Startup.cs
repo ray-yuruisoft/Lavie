@@ -24,7 +24,7 @@ namespace Lavie
             /*
             builder.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType = ".XOOHOO",     // "ApplicationCookie"
+                AuthenticationType = ".Lavie",     // "ApplicationCookie"
                 AuthenticationMode = AuthenticationMode.Active
             });
             */

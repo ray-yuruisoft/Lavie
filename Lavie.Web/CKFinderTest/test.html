@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>CKFinder 3 - File Browser</title>
+</head>
+<body>
+		<input id="ckfinder-input-1" type="text" style="width:60%">
+		<button id="ckfinder-popup-1" class="button-a button-a-background">Browse Server</button>
+
+		<div style="height: 5px"></div>
+
+		<input id="ckfinder-input-2" type="text" style="width:60%">
+		<button id="ckfinder-popup-2" class="button-a button-a-background">Browse Server</button>
+
+<script src="ckfinder.js"></script>
+<script>
+var button1 = document.getElementById( 'ckfinder-popup-1' );
+var button2 = document.getElementById( 'ckfinder-popup-2' );
+
+button1.onclick = function() {
+	selectFileWithCKFinder( 'ckfinder-input-1' );
+};
+button2.onclick = function() {
+	selectFileWithCKFinder( 'ckfinder-input-2' );
+};
+
+function selectFileWithCKFinder( elementId ) {
+	CKFinder.popup( {
+		chooseFiles: true,
+		width: 800,
+		height: 600,
+		onInit: function( finder ) {
+			finder.on( 'files:choose', function( evt ) {
+				var file = evt.data.files.first();
+				var output = document.getElementById( elementId );
+				output.value = file.getUrl();
+			} );
+
+			finder.on( 'file:choose:resizedImage', function( evt ) {
+				var output = document.getElementById( elementId );
+				output.value = evt.data.resizedUrl;
+			} );
+		}
+	} );
+}
+</script>
+
+</body>
+</html>
+

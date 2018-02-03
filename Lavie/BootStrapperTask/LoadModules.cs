@@ -64,7 +64,7 @@ namespace Lavie.BootStrapperTask
                 }
             }
 
-            //由于IXoohooModule.RegisterFilters方法内部可能会用到注册的路由信息(如RouteFilterCriteria)，
+            //由于ILavieModule.RegisterFilters方法内部可能会用到注册的路由信息(如RouteFilterCriteria)，
             //所以该方法在路由注册(RegisterRoutes)之后调用
             moduleRegistry.RegisterFilters(filterRegistry, globalFilters);
         }

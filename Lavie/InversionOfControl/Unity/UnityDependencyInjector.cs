@@ -55,7 +55,7 @@ namespace Lavie.InversionOfControl.Unity
 
             // 注册已有对象实例为单例
             parentContainer
-                // XoohooConfigurationSection为自定义配置节点，用于配置Module信息
+                // LavieConfigurationSection为自定义配置节点，用于配置Module信息
                 .RegisterInstance((LavieConfigurationSection)ConfigurationManager.GetSection("lavie"))
                 // AppSettingsHelper对web.config的appSettings节点进行封装
                 .RegisterInstance(new AppSettingsHelper(ConfigurationManager.AppSettings))
@@ -85,8 +85,8 @@ namespace Lavie.InversionOfControl.Unity
             parentContainer
                 .RegisterInstance<IBackgroundServiceRegistry>(new BackgroundServiceRegistry(this));
 
-            // LoadModules引导程序，根据Xoohoo.config中modules节点的配置，对模块进行加载
-            // LoadBackgroundServices引导程序，根据Xoohoo.config中backgroundServices节点的配置,对后台服务进行加载
+            // LoadModules引导程序，根据Lavie.config中modules节点的配置，对模块进行加载
+            // LoadBackgroundServices引导程序，根据Lavie.config中backgroundServices节点的配置,对后台服务进行加载
             parentContainer
                 .RegisterInstance<IBootStrapperTask>("LoadModules", new LoadModules(this))
                 .RegisterInstance<IBootStrapperTask>("LoadBackgroundServices", new LoadBackgroundServices(this));
@@ -96,11 +96,11 @@ namespace Lavie.InversionOfControl.Unity
             foreach (ConnectionStringSettings connectionString in ConfigurationManager.ConnectionStrings)
                 parentContainer.RegisterInstance(connectionString.Name, connectionString.ConnectionString);
 
-            // Xoohoo.config中的数据库链接字符串
+            // Lavie.config中的数据库链接字符串
             foreach (ConnectionStringSettings connectionString in parentContainer.Resolve<LavieConfigurationSection>().ConnectionStrings)
                 parentContainer.RegisterInstance(connectionString.Name, connectionString.ConnectionString);
 
-            // IUser、RequestContext和RouteTable.Routes（另外还有个RequestDataFormat枚举对象）将会组合成XoohooContext对象
+            // IUser、RequestContext和RouteTable.Routes（另外还有个RequestDataFormat枚举对象）将会组合成LavieContext对象
             parentContainer
                 //.RegisterType<IUserExtendedPropertyService, UserExtendedPropertyService>()
                 // 延迟获取数据

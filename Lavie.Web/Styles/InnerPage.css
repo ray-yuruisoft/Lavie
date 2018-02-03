@@ -1,0 +1,447 @@
+﻿body
+{
+    margin:0px;
+    padding:8px;
+    background-color:#fff;
+    font-size:12px;
+    color:#104263; 
+    font-family:"宋体";
+}
+form{
+    margin:0px;
+    padding:0px;
+}
+ul
+{
+    margin:0px; 
+    padding:0px; 
+}
+li 
+{
+    margin:0px; 
+    padding:2px;
+    list-style-type:none;
+}
+a{
+    text-decoration:none;
+    color:#104263;    
+}
+a img
+{
+    border:0px;
+}
+.nav{
+	background-color:#fff;
+	border: 1px solid #C2D8E0;
+	padding-left:4px;
+	height:28px;
+	line-height:28px;
+	font-weight:bold;
+	background-image:url(images/navbg.jpg);
+}
+.tbl
+{
+	width:100%;
+	background-color:#fff;
+	border: 1px solid #C2D8E0;
+	margin-bottom:4px;
+	color:#104263;
+}
+.tit
+{
+    width:120px;
+	background-color:#F1F5F6;
+    text-align:right;        
+}
+.tit80
+{
+    width:80px;
+	background-color:#F1F5F6;
+    text-align:right;
+}
+.tit90
+{
+    width:80px;
+	background-color:#F1F5F6;
+    text-align:right;
+}
+.con
+{
+    width:288px;
+}
+/*文本输入框*/
+.input
+{
+	border: 1px solid #bbc3bb;
+	background-color: #fff;
+    width:280px;
+	height:20px;
+}
+.input20
+{
+	border: 1px solid #bbc3bb;
+	background-color: #fff;
+    width:20px;
+	height:20px;
+}
+.input40
+{
+	border: 1px solid #bbc3bb;
+	background-color: #fff;
+    width:40px;
+	height:20px;
+}
+.input60
+{
+	border: 1px solid #bbc3bb;
+	background-color: #fff;
+    width:60px;
+	height:20px;
+}
+.input80
+{
+	border: 1px solid #bbc3bb;
+	background-color: #fff;
+    width:80px;
+	height:20px;
+}
+.input100
+{
+	border: 1px solid #bbc3bb;
+	background-color: #fff;
+    width:100px;
+	height:20px;
+}
+
+.input120
+{
+	border: 1px solid #bbc3bb;
+	background-color: #fff;
+    width:120px;
+	height:20px;
+}
+.input140
+{
+	border: 1px solid #bbc3bb;
+	background-color: #fff;
+    width:140px;
+	height:20px;
+}
+.input160
+{
+	border: 1px solid #bbc3bb;
+	background-color: #fff;
+    width:160px;
+	height:20px;
+}
+.textarea
+{
+    width:280px;
+    border: 1px solid #bbc3bb;
+    background-color:#fff;
+}
+/*垂直居中*/
+.valignmiddle
+{
+    vertical-align: middle
+}
+/**************************表格或Grid***********************/
+/*表头*/
+.rowhead th
+{
+    background-color:#C2D8E0; 
+    height: 24px;
+}
+
+/*行*/
+.rowodd td
+{
+    background-color:#D8E6EB;
+}
+
+/*数字列*/
+.titNum
+{
+    width:40px;
+    height:22px;
+}
+.conNum
+{
+    width:40px;
+    height:22px;
+    text-align:center;  
+}
+.conLeft {
+    text-align: left;
+}
+.conRight {
+    text-align: right;
+}
+.conCenter {
+    text-align: center;
+}
+/*编辑 删除 添加等单命令列*/
+.titCtr
+{
+    width:36px;
+    height:22px;
+    text-align:center;
+}
+.conCtr
+{
+    width:36px;
+    height:22px;
+    text-align:center;  
+}
+.titCtr2
+{
+    width:60px;
+    height:22px;
+    text-align:center;
+}
+.conCtr2
+{
+    width:60px;
+    height:22px;
+    text-align:center;  
+}
+.titCtr3
+{
+    width:88px;
+    height:22px;
+    text-align:center;
+}
+.conCtr3
+{
+    width:88px;
+    height:22px;
+    text-align:center;  
+}
+
+/*其他列*/
+.titOth
+{
+    height:22px;
+    text-align:left;
+    padding-left:8px;
+    padding-right:8px;
+}
+.conOth
+{
+    height:22px;
+    word-break:break-all;
+    padding-left:8px;
+    padding-right:8px;
+}
+/*宽度列*/
+.tit200
+{
+    height:22px;
+    width:200px;
+    text-align:left;
+    padding-left:8px;
+    padding-right:8px;
+}
+.con200
+{
+    height:22px;
+    width:200px;
+    padding-left:8px;
+    padding-right:8px;
+}
+.tit120
+{
+    height:22px;
+    width:120px;
+    text-align:left;
+    padding-left:8px;
+    padding-right:8px;
+}
+.con120
+{
+    height:22px;
+    width:120px;
+    padding-left:8px;
+    padding-right:8px;
+}
+.tit100
+{
+    height:22px;
+    width:100px;
+    text-align:left;
+    padding-left:8px;
+    padding-right:8px;
+}
+.con100
+{
+    height:22px;
+    width:100px;
+    padding-left:8px;
+    padding-right:8px;
+}
+.con120 {
+    height: 22px;
+    width: 120px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.con140 {
+    height: 22px;
+    width: 140px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.tit90
+{
+    height:22px;
+    width:90px;
+    text-align:left;
+    padding-left:8px;
+    padding-right:8px;
+}
+.con90
+{
+    height:22px;
+    width:90px;
+    padding-left:8px;
+    padding-right:8px;
+}
+
+.tit80
+{
+    height:22px;
+    width:80px;
+    text-align:left;
+    padding-left:8px;
+    padding-right:8px;
+}
+.con80
+{
+    height:22px;
+    width:80px;
+    padding-left:8px;
+    padding-right:8px;
+}
+.tit60
+{
+    height:22px;
+    width:60px;
+    text-align:left;
+    padding-left:8px;
+    padding-right:8px;
+}
+.con60
+{
+    height:22px;
+    width:60px;
+    padding-left:8px;
+    padding-right:8px;
+}
+.tit50
+{
+    height:22px;
+    width:60px;
+    text-align:left;
+    padding-left:8px;
+    padding-right:8px;
+}
+.con50
+{
+    height:22px;
+    width:60px;
+    padding-left:8px;
+    padding-right:8px;
+}
+
+.tit40
+{
+    height:22px;
+    width:40px;
+    text-align:left;
+    padding-left:8px;
+    padding-right:8px;
+}
+.con40
+{
+    height:22px;
+    width:40px;
+    padding-left:8px;
+    padding-right:8px;
+}
+/**************************表格或Grid END***********************/
+/**************************分页**************************/
+.pager
+{
+    padding:4px;
+	background-color:#D8E6EB;
+	border: 1px solid #C2D8E0;
+	margin-top:4px;
+}
+.pager a
+{
+    color:#000;
+}
+
+.pager .disabled 
+{
+	border:1px solid #999;
+	color:#666666;
+	margin-top:4px;
+	padding:2px;
+	text-align:center;
+}
+
+.pager .current 
+{
+	background-color:#8AA8C2;
+	border:1px solid #999;
+	color:#fff;
+	font-weight:bold;
+	margin-top:4px;
+	padding:2px;
+	text-align:center;
+}
+
+.pager span, .pager a
+{
+	margin: 4px 3px;
+}
+
+.pager a 
+{
+	border:1px solid #c0c0c0;
+	padding:2px;
+	text-align:center;
+	text-decoration:none;
+	line-height:100%;
+}
+/**************************分页 END**************************/
+
+/*loading*/
+#loading{
+    display:none;
+    z-index:99999;
+    position:absolute;
+    
+    top:0;
+    left:0;
+    width:100%;
+    text-align:center;
+	padding-top:200px;
+    background-color:#000;
+}
+/*loading END*/
+.timer
+{
+    margin:10px;    
+}
+.ctrbtn
+{
+    padding:4px;
+    height:24px;
+    line-height:24px;
+	background-color:#D8E6EB;
+	border: 1px solid #C2D8E0;
+	margin-top:4px;
+    margin-bottom: 4px;
+}

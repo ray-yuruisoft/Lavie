@@ -1,0 +1,41 @@
+.field-validation-default
+{
+    background:#E9F0FF url(images/default.gif) no-repeat; 
+    width:240px;
+    padding:0 5px 0 25px; 
+	font-size: 12px;
+	color:#000;
+	height:22px;
+	line-height:22px; 
+	vertical-align:middle;	
+	display:inline-block;
+}
+.field-validation-valid
+{
+    background:#E9F0FF url(images/correct.gif) no-repeat; 
+    width:240px;
+    padding:0 5px 0 25px; 
+	font-size: 12px;
+	color:#000;
+	height:22px;
+	line-height:22px; 
+	vertical-align:middle;	
+	display:inline-block;
+}
+.field-validation-error
+{
+    background:#E9F0FF url(images/error.gif) no-repeat; 
+    width:240px;
+    padding:0 5px 0 25px; 
+	font-size: 12px;
+	color:#000;
+	height:22px;
+	line-height:22px; 
+	vertical-align:middle;	
+	display:inline-block;
+}
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}

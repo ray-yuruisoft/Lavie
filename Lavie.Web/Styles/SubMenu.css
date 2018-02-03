@@ -1,0 +1,60 @@
+﻿body
+{
+    margin:0px;
+    padding:0px;
+    background-color:#1267A7;
+    font-size:12px;
+    color:#000;
+}
+a
+{
+    text-decoration:none;
+}
+#subMenu
+{
+    width:164px; 
+    margin:0px auto;   
+}
+#subMenu ul,li
+{
+    margin:0px;
+    padding:0px;
+    list-style-type:none;
+}
+.MenuLevel1
+{
+    width:134px;
+    padding-left:30px;
+    height:35px;
+    line-height:35px;
+    font-size:14px;       
+    font-weight:bold;
+    margin-top:8px;
+    color:White;
+    background-image:url(images/MenuLevel1.jpg);
+}
+.MenuLevel1 a 
+{
+    color:#FBFFFF;
+}
+.MenuLevel2
+{
+    width:132px;
+    padding-left:30px;
+    height:24px;
+    line-height:24px;
+    margin-top:4px;
+    border: 1px solid #C2D8E0;
+    background-color:White;
+}
+.MenuLevel2 ul li
+{
+    float:left;
+    padding:0px;
+    margin-right:10px;
+    white-space:nowrap;
+}
+.MenuLevel2 a 
+{
+    color:#124266;
+}

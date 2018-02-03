@@ -34,7 +34,7 @@ namespace Lavie.Infrastructure
             foreach (LavieDataProviderConfigurationElement dataProvider in config.Providers)
             {
                 // 如果dataProviders节点下的元素的name属性的值，和module的dataProvider属性值相等
-                // 创建相关IXoohooDataProvider实例并执行ConfigureProvider方法以配置数据代理相关的信息
+                // 创建相关ILavieDataProvider实例并执行ConfigureProvider方法以配置数据代理相关的信息
                 if (dataProvider.Name == module.DataProvider)
                 {
                     Type dataProviderType = Type.GetType(dataProvider.Type);

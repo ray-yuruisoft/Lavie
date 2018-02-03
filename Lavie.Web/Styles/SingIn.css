@@ -1,0 +1,61 @@
+html, body, div, span, input, p,h1, h2, h3, h4, h5, h6, blockquote, a, abbr, acronym, address, strong, b, u, i, center,dl, dt, dd, ol, ul,td,tr
+{
+    font-family:"Microsoft Yahei","Î¢ÈíÑÅºÚ","ËÎÌå", "Simsun", "Open Sans";
+}
+
+body
+{
+    font-size:12px;
+	margin:0px;
+	color:#FDF9FA;
+    background-image:url(images/bg.jpg);   
+	background-repeat:no-repeat;
+	background-position:top;
+	background-color:#5EA4CF;
+}
+a
+{
+	color:#FDF9FA;
+}
+#divlogin
+{
+	width:412px;
+    background-image:url(images/login_bg.jpg);
+    background-position:top;
+    background-repeat:repeat-y;
+	margin:205px auto;
+}
+#divlogintop
+{
+    width:412px;
+    height:52px;
+    background-image:url(images/login_top.jpg);
+    background-position:top;
+}
+#divloginmid
+{
+}
+#divloginmidcontent
+{
+    padding:30px 8px 8px 10px;
+    background-image:url(images/login_con.jpg);
+    background-position:top;
+    height:182px;
+}
+.input
+{
+	border: 1px solid #bbc3bb;
+	background-color: #FFFFFF;
+	width:110px;
+	height:20px;
+	padding:2px;
+}
+.input40
+{
+	border: 1px solid #bbc3bb;
+	background-color: #FFFFFF;
+	width:40px;
+	height:20px;
+	padding:2px;
+}
+

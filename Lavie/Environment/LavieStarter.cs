@@ -93,7 +93,7 @@ namespace Lavie.Environment
         private static void RegisterActionInvoker(IDependencyInjector dependencyInjector)
         {
             dependencyInjector
-                //.RegisterType<IActionInvoker, XoohooControllerActionInvoker>()
+                //.RegisterType<IActionInvoker, LavieControllerActionInvoker>()
                 .RegisterType<IAsyncActionInvoker, LavieAsyncControllerActionInvoker>();
         }
 

@@ -1,0 +1,74 @@
+body
+{
+    font-size:12px;
+	margin:0px;
+	color:#FDF9FA;
+    background-image:url(images/bg.jpg);   
+	background-repeat:no-repeat;
+	background-position:top;
+	background-color:#5EA4CF;
+}
+a
+{
+color:#053E7C;
+text-decoration:underline
+}
+#divPrompt
+{
+	width:400px;
+	background-color:#61A4CF;
+	margin:120px auto;
+	border: 5px solid #569FCE;
+}
+#divPromptLine
+{
+    width:400px;
+    height:4px;
+	font-size:0px;
+	background-color:#569FCE;
+	margin-bottom:10px;
+}
+#divPromptTitle
+{
+    width:400px;
+    height:52px;
+	font-size:14px;
+	line-height:52px;
+	text-align:center;
+}
+#divPromptContent
+{
+    min-height:80px;
+¡¡¡¡_height:80px;
+	padding:20px 30px 10px 30px;
+	vertical-align:top;
+	margin-top:10px;
+}
+#divPromptContent ul
+{
+    margin:0px;
+    padding:0px;
+    list-style-type:none;    
+}
+#divPromptContent li
+{
+list-style:square;
+padding:0px;
+margin:0px;
+line-height:200%;
+}
+#nav
+{
+	height:24px;
+	line-height:24px;
+	text-align:center;
+	margin-bottom:10px;
+}
+.input
+{
+	border: 1px solid #bbc3bb;
+	background-color: #FFFFFF;
+	width:110px;
+	height:20px;
+	padding:2px;
+}

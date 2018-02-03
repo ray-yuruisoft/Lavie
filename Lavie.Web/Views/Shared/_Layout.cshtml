@@ -1,0 +1,112 @@
+﻿@{
+    int index = ViewBag.Index;
+    const string acClass = "class=\"on\"";
+}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title - 记上学</title>
+    <meta name="keywords" content="记上学,视频考勤,手机直播" />
+    <meta name="description" content="“记上学”是一款适用于幼儿园，培训机构，中小学的家校互通平台。" />
+    <link href="/Site/css/public.css" rel="stylesheet" type="text/css">
+    <script src="/Site/js/jquery-1.8.3.min.js"></script>
+    <script src="/Site/js/sscr.min.js"></script>
+    <script src="/Site/js/jquery.flexslider-min.js"></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="Bookmark" href="/favicon.ico" />
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?0d8b96aba36c6cae84f1ddf751fe6b82";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="/Scripts/html5shiv.js"></script>
+    <![endif]-->
+    @RenderSection("HeadCustom", false)
+    @RenderSection("Scripts", false)
+    <style>
+        #qiao-mess-wrap, #qiao-icon-wrap, #qiao-invite-wrap {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    @{
+        var urlHeader = (ViewBag.IsRembb == true || Request.Url.AbsoluteUri.Contains("192") || Request.Url.AbsoluteUri.Contains("127")) ? "" : "http://www.rembb.com";
+    }
+    <div class="main clearfix">
+        <div class="main_l">
+            <div class="logo"><a href="/"><img src="/site/images/logo.png"></a></div>
+            <div class="nav">
+                <ul>
+                    <li @if (index == 0) { WriteLiteral(acClass); }><a href="@urlHeader/"><p>首页</p><span><em>Home Page</em></span></a></li>
+                    <li @if (index == 1) { WriteLiteral(acClass); }><a href="@urlHeader/CompanyProfile"><p>公司概况</p><span><em>Company Profile</em></span></a></li>
+                    <li @if (index == 2) { WriteLiteral(acClass); }><a href="@urlHeader/FunctionIntroduction"><p>功能介绍</p><span><em>Function Introduction</em></span></a></li>
+                    <li @if (index == 3) { WriteLiteral(acClass); }><a href="@urlHeader/MarketDynamics"><p>市场动态</p><span><em>Market Dynamics</em></span></a></li>
+                    <li @if (index == 4) { WriteLiteral(acClass); }><a href="@urlHeader/AllianceCooperation"><p>加盟合作</p><span><em>Alliance Cooperation</em></span></a></li>
+                    @if (ViewBag.IsRembb == true)
+                    {
+                        <li @if (index == 5) { WriteLiteral(acClass); }><a href="http://jsx.tomybb.com:9004/Login"><p>用户登录</p><span><em>User Login</em></span></a></li>
+                    }
+                    else
+                    {
+                        <li @if (index == 5) { WriteLiteral(acClass); }><a href="/Login"><p>用户登录</p><span><em>User Login</em></span></a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="main_r">
+            @RenderBody()
+            @if (index != 99)
+            {
+                <div class="footer clearfix">
+                    <div class="footer_hd clearfix">
+                        <div class="footer_l fl clearfix">
+                            <dl class="fr">
+                                <dt><img src="/site/images/pic6.jpg"></dt>
+                                <dd>扫一扫下载APP</dd>
+                                <dd><a href="http://jsx.tomybb.com:9004/DownloadResources/Attendance.apk">直播云终端App下载</a></dd>
+                            </dl>
+                            <ul class="fr">
+                                <li><a href="@urlHeader/"><span>Home page</span><em>首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</em></a></li>
+                                <li><a href="@urlHeader/CompanyProfile"><span>Company profile</span><em>公司概况</em></a></li>
+                                <li><a href="@urlHeader/FunctionIntroduction"><span>Function introduction</span><em>功能介绍</em></a></li>
+                                <li><a href="@urlHeader/MarketDynamics"><span>Market dynamics</span><em>市场动态</em></a></li>
+                                <li><a href="@urlHeader/AllianceCooperation"><span>Alliance cooperation</span><em>加盟合作</em></a></li>
+                                @if (ViewBag.IsRembb == true)
+                                {
+                                    <li><a href="http://jsx.tomybb.com:9004/Login"><span>User login</span><em>用户登录</em></a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/Login"><span>User login</span><em>用户登录</em></a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="footer_r fr">
+                            <dl class="clearfix">
+                                <dt><img src="/site/images/pic7.png"></dt>
+                                <dd>
+                                    <p><span>成都记上学科技有限公司</span></p>
+                                    <p>地址：成都市高新区天府大道中段530-2（东方希望天祥广场4栋）2509号</p>
+                                    <p>邮箱：2433550363@qq.com</p>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="copyright clearfix">&copy; 2016成都记上学科技有限公司 蜀ICP备15036353号</div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="unity" vs:help="Configuration to Unity Application Block">
+		<xs:annotation>
+			<xs:documentation>Unity Application Block Configuration</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="typeAliases" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The typeAlises element holds a collection of type aliases that allows you to specify more easily the types required in mappings, lifetimes, instances, extensions, and elsewhere in the configuration for Unity containers.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="typeAlias" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>The typeAlias element defines a single alias between a specific type and a name that you can use to refer to the type elsewhere in the configuration.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute ref="alias" use="required">
+										<xs:annotation>
+											<xs:documentation>The name of the alias and the shorthand name to use elsewhere in the configuration to refer to the specified type.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute ref="type" use="required">
+										<xs:annotation>
+											<xs:documentation>The full type name of the type for this alias.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="containers" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The containers element holds a collection of Unity containers.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="container" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>The container element holds configuration details of an individual Unity container.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="types" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>The types element holds a collection of the registered type mappings for this container.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="type" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>The type element defines a type mapping to insert into the Unity container.  </xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="lifetime" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>The lifetime element contains details of the lifetime manager to use with the type mapping. If you do not specify a lifetime manager, the mapping uses the transient lifetime manager.</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:attribute ref="name">
+																			<xs:annotation>
+																				<xs:documentation>The name to use when registering this lifetime manager.</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute ref="type" use="required">
+																			<xs:annotation>
+																				<xs:documentation>The type of the lifetime manager to use for this mapping. Can be a user-defined alias specified in the typeAliases section of the configuration, or one of the default aliases singleton or external.</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute ref="value">
+																			<xs:annotation>
+																				<xs:documentation>Any value required to initialize the lifetime manager.</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute ref="typeConverter">
+																			<xs:annotation>
+																				<xs:documentation>The type converter to use to convert the value provided to match the type of the instance. If not specified, the default converter for the specified type is used.</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="typeConfig" minOccurs="0" maxOccurs="unbounded">
+																	<xs:annotation>
+																		<xs:documentation>The typeConfig element specifies a configuration section and the associated section handler class that determines the dependency injection requirements of this object type.</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="constructor" minOccurs="0">
+																				<xs:annotation>
+																					<xs:documentation>The constructor element contains details of the constructor injection requirements for this object type. You can include only one constructor element in each typeConfig section.
+
+</xs:documentation>
+																				</xs:annotation>
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="param" minOccurs="0" maxOccurs="unbounded">
+																							<xs:annotation>
+																								<xs:documentation>The constructor element has one or more a child param elements. These correspond to the parameters of the constructor you want to specify. The param element can contain either a single value element or a single dependency element. Use a value element to specify the value for the parameter, or use a dependency element to specify a non-default dependency that Unity should apply up when setting the parameter. If you do not include a child element, Unity will attempt to resolve the value of the parameter using default dependency injection resolved through the container. 
+
+</xs:documentation>
+																							</xs:annotation>
+																							<xs:complexType>
+																								<xs:choice minOccurs="0">
+																									<xs:element name="value" minOccurs="0">
+																										<xs:annotation>
+																											<xs:documentation>The value element specifies a value to apply to a  parameter. The value can be one of the standard .NET data types such as String or Integer, and Unity will use the corresponding built-in .NET value converter to evaluate the value. Alternatively, you can use a custom object type and provide a reference to a converter for they type.</xs:documentation>
+																										</xs:annotation>
+																										<xs:complexType>
+																											<xs:attribute ref="type">
+																												<xs:annotation>
+																													<xs:documentation>The type of the constructor parameter. Can be a user-defined alias specified in the typeAliases section of the configuration, or one of the standard .NET data types. If you do not specify a type, the constructor parameter is assumed to be of type String.</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																											<xs:attribute ref="value" use="required">
+																												<xs:annotation>
+																													<xs:documentation>The value for this element parameter constructor. 
+</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																											<xs:attribute ref="typeConverter">
+																												<xs:annotation>
+																													<xs:documentation>The type converter to use to convert the value provided to match the type of the instance. If not specified, the default converter for the specified type is used.</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																										</xs:complexType>
+																									</xs:element>
+																									<xs:element name="dependency" minOccurs="0">
+																										<xs:annotation>
+																											<xs:documentation>The dependency element specifies that Unity should resolve the value for this parameter constructor by using the types and mappings registered in the container. If you do not specify a type, it uses the type defined for the parameter or property. If you do not specify the name of a mapping or registration, it uses the default (un-named) mapping or registration.</xs:documentation>
+																										</xs:annotation>
+																										<xs:complexType>
+																											<xs:attribute ref="name">
+																												<xs:annotation>
+																													<xs:documentation>The name of the named type or mapping registered in the container to use to resolve this dependency.</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																											<xs:attribute ref="type">
+																												<xs:annotation>
+																													<xs:documentation>The type to use to resolve a dependency mapping or registration. This attribute is optional. If you do not specify a type, Unity will resolve the type based on the type of the parent parameter or property.</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																										</xs:complexType>
+																									</xs:element>
+																								</xs:choice>
+																								<xs:attribute ref="name" use="required">
+																									<xs:annotation>
+																										<xs:documentation>The name of the constructor parameter.</xs:documentation>
+																									</xs:annotation>
+																								</xs:attribute>
+																								<xs:attribute ref="parameterType" use="required">
+																									<xs:annotation>
+																										<xs:documentation>The data type of this constructor parameter. Can be a user-defined alias specified in the typeAliases section of the configuration.</xs:documentation>
+																									</xs:annotation>
+																								</xs:attribute>
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:sequence>
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element name="property" minOccurs="0" maxOccurs="unbounded">
+																				<xs:annotation>
+																					<xs:documentation>The property element contains details of the property (setter) injection requirements for this object type. The property element can have either a single value child element or a single dependency child element, but not both. Use a value element to specify the value for the property, or use a dependency element to specify a non-default dependency that Unity should apply up when setting the property. If you do not include a child element, Unity will attempt to resolve the value of the property using default dependency injection resolved through the container. </xs:documentation>
+																				</xs:annotation>
+																				<xs:complexType>
+																					<xs:choice minOccurs="0">
+																						<xs:element name="value" minOccurs="0">
+																							<xs:annotation>
+																								<xs:documentation>The value element specifies a value to apply to a property. The value can be one of the standard .NET data types such as String or Integer, and Unity will use the corresponding built-in .NET value converter to evaluate the value. Alternatively, you can use a custom object type and provide a reference to a converter for they type.</xs:documentation>
+																							</xs:annotation>
+																							<xs:complexType>
+																								<xs:attribute ref="type">
+																									<xs:annotation>
+																										<xs:documentation>The type of the property. Can be a user-defined alias specified in the typeAliases section of the configuration, or one of the standard .NET data types. If you do not specify a type, the property parameter is assumed to be of type String.</xs:documentation>
+																									</xs:annotation>
+																								</xs:attribute>
+																								<xs:attribute ref="value" use="required">
+																									<xs:annotation>
+																										<xs:documentation>The value for this property parameter constructor. 
+</xs:documentation>
+																									</xs:annotation>
+																								</xs:attribute>
+																								<xs:attribute ref="typeConverter">
+																									<xs:annotation>
+																										<xs:documentation>The type converter to use to convert the value provided to match the type of the instance. If not specified, the default converter for the specified type is used.</xs:documentation>
+																									</xs:annotation>
+																								</xs:attribute>
+																							</xs:complexType>
+																						</xs:element>
+																						<xs:element name="dependency" minOccurs="0">
+																							<xs:annotation>
+																								<xs:documentation>The dependency element specifies that Unity should resolve the value for this property by using the types and mappings registered in the container. If you do not specify a type, it uses the type defined for the  property. If you do not specify the name of a mapping or registration, it uses the default (un-named) mapping or registration.</xs:documentation>
+																							</xs:annotation>
+																							<xs:complexType>
+																								<xs:attribute ref="name">
+																									<xs:annotation>
+																										<xs:documentation>The name of the named type or mapping registered in the container to use to resolve this dependency.</xs:documentation>
+																									</xs:annotation>
+																								</xs:attribute>
+																								<xs:attribute ref="type">
+																									<xs:annotation>
+																										<xs:documentation>The type to use to resolve a dependency mapping or registration. This attribute is optional. If you do not specify a type, Unity will resolve the type based on the type of the parent parameter or property.</xs:documentation>
+																									</xs:annotation>
+																								</xs:attribute>
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:choice>
+																					<xs:attribute ref="name" use="required">
+																						<xs:annotation>
+																							<xs:documentation>The name of the property to apply dependency injection to. </xs:documentation>
+																						</xs:annotation>
+																					</xs:attribute>
+																					<xs:attribute ref="propertyType" use="required">
+																						<xs:annotation>
+																							<xs:documentation>The data type of this constructor parameter. Can be a user-defined alias specified in the typeAliases section of the configuration.</xs:documentation>
+																						</xs:annotation>
+																					</xs:attribute>
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element name="method" minOccurs="0" maxOccurs="unbounded">
+																				<xs:annotation>
+																					<xs:documentation>The method element contains details of the method injection requirements for this object type.</xs:documentation>
+																				</xs:annotation>
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="param" minOccurs="0" maxOccurs="unbounded">
+																							<xs:annotation>
+																								<xs:documentation>The method element has one or more a child param elements. These correspond to the parameters of the constructor you want to specify. The param element can contain either a single value element or a single dependency element. Use a value element to specify the value for the parameter, or use a dependency element to specify a non-default dependency that Unity should apply up when setting the parameter. If you do not include a child element, Unity will attempt to resolve the value of the parameter using default dependency injection resolved through the container. 
+
+</xs:documentation>
+																							</xs:annotation>
+																							<xs:complexType>
+																								<xs:choice minOccurs="0">
+																									<xs:element name="value" minOccurs="0">
+																										<xs:annotation>
+																											<xs:documentation>The value element specifies a value to apply to a property or parameter. The value can be one of the standard .NET data types such as String or Integer, and Unity will use the corresponding built-in .NET value converter to evaluate the value. Alternatively, you can use a custom object type and provide a reference to a converter for they type.</xs:documentation>
+																										</xs:annotation>
+																										<xs:complexType>
+																											<xs:attribute ref="type">
+																												<xs:annotation>
+																													<xs:documentation>The type of the method parameter. Can be a user-defined alias specified in the typeAliases section of the configuration, or one of the standard .NET data types. If you do not specify a type, the constructor parameter is assumed to be of type String.</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																											<xs:attribute ref="value" use="required">
+																												<xs:annotation>
+																													<xs:documentation>The value for this element parameter method.
+</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																											<xs:attribute ref="typeConverter">
+																												<xs:annotation>
+																													<xs:documentation>The type converter to use to convert the value provided to match the type of the instance. If not specified, the default converter for the specified type is used.</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																										</xs:complexType>
+																									</xs:element>
+																									<xs:element name="dependency" minOccurs="0">
+																										<xs:annotation>
+																											<xs:documentation>The dependency element specifies that Unity should resolve the value for this parameter constructor by using the types and mappings registered in the container. If you do not specify a type, it uses the type defined for the parameter or property. If you do not specify the name of a mapping or registration, it uses the default (un-named) mapping or registration.</xs:documentation>
+																										</xs:annotation>
+																										<xs:complexType>
+																											<xs:attribute ref="name">
+																												<xs:annotation>
+																													<xs:documentation>The name of the named type or mapping registered in the container to use to resolve this dependency.</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																											<xs:attribute ref="type">
+																												<xs:annotation>
+																													<xs:documentation>The type to use to resolve a dependency mapping or registration. This attribute is optional. If you do not specify a type, Unity will resolve the type based on the type of the parent parameter or property.</xs:documentation>
+																												</xs:annotation>
+																											</xs:attribute>
+																										</xs:complexType>
+																									</xs:element>
+																								</xs:choice>
+																								<xs:attribute ref="name" use="required">
+																									<xs:annotation>
+																										<xs:documentation>The name of the method parameter.</xs:documentation>
+																									</xs:annotation>
+																								</xs:attribute>
+																								<xs:attribute ref="parameterType">
+																									<xs:annotation>
+																										<xs:documentation>The data type of this method parameter. Can be a user-defined alias specified in the typeAliases section of the configuration.</xs:documentation>
+																									</xs:annotation>
+																								</xs:attribute>
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:sequence>
+																					<xs:attribute ref="name" use="required">
+																						<xs:annotation>
+																							<xs:documentation>The name of the method to apply dependency injection to.</xs:documentation>
+																						</xs:annotation>
+																					</xs:attribute>
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:sequence>
+																		<xs:attribute ref="name">
+																			<xs:annotation>
+																				<xs:documentation>The name to use when registering the configuration of dependency injection requirements for this type. This attribute is optional only when the configuration contains a single typeConfig element. If you include more than one typeConfig element, you must differentiate them with unique values for the name attribute.</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																		<xs:attribute ref="extensionType" use="required">
+																			<xs:annotation>
+																				<xs:documentation>The type that will interpret the dependency configuration for this object. The default type is TypeInjectionElement. Allows you to create and specify custom dependency configuration sections for objects. Must be a fully qualified type name.</xs:documentation>
+																			</xs:annotation>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute ref="name">
+																<xs:annotation>
+																	<xs:documentation>The name to use when registering this type. If you do not specify a name, it creates a default mapping for the specified types.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute ref="type" use="required">
+																<xs:annotation>
+																	<xs:documentation>The source type to configure in the container. The type of the object to map from if this is a mapping registration, or the type of the object if this is a singleton registration. Can be a user-defined alias specified in the typeAliases section of the configuration.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute ref="mapTo">
+																<xs:annotation>
+																	<xs:documentation>The destination type for type mapping. The type of the object to map to if this is a mapping registration.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="instances" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>The instances element holds a collection of the existing object instances for this container. These are objects registered with the container using the RegisterInstance method.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="add" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Add New Value Instance</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute ref="name">
+																<xs:annotation>
+																	<xs:documentation>The name to use when registering this value instance.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute ref="type">
+																<xs:annotation>
+																	<xs:documentation>The type of this instance.Can be a user-defined alias specified in the typeAliases section of the configuration. If omitted, the assumed type is System.String</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute ref="value" use="required">
+																<xs:annotation>
+																	<xs:documentation>The value to use to initialize the instance.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute ref="typeConverter">
+																<xs:annotation>
+																	<xs:documentation>The type converter to use to convert the value provided to match the type of the instance. If not specified, the default converter for the specified type is used.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="extensions" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>The collection of extension elements that specify which extensions to add to the container.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="add" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Add New Extension</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute ref="type" use="required">
+																<xs:annotation>
+																	<xs:documentation>The type of extension to add to the container. Can be a user-defined alias specified in the typeAliases section of the configuration.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="extensionConfig" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>The collection of extension configuration elements that are used to add arbitrary new extensions to the configuration file.
+</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="add" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>Add New Extension Configuration </xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute ref="name" use="required">
+																<xs:annotation>
+																	<xs:documentation>The name to use when registering this extension configuration.
+</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute ref="type" use="required">
+																<xs:annotation>
+																	<xs:documentation>The source type of the extension configuration. Must be a fully qualified type name. The extension must contain a class that can read the contents of the extension configuration.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:anyAttribute namespace="##targetNamespace" processContents="lax">
+																<xs:annotation>
+																	<xs:documentation>User-defined custom attribute</xs:documentation>
+																</xs:annotation>
+															</xs:anyAttribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+									<xs:attribute ref="name">
+										<xs:annotation>
+											<xs:documentation>Name of this container configuration. The config may be retrieved by name. If not specified, this is the default container configuration.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--Complex Types-->
+	<xs:complexType name="extensionType">
+		<xs:annotation>
+			<xs:documentation>User-Defined Custom Section specfied in extensionType of typeConfig</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:any namespace="##targetNamespace" processContents="lax" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Global Attributes-->
+	<xs:attribute name="name" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The global name attribute</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="type" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The global type attribute</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="mapTo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The global mapTo attribute</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="value" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The global value attribute</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="typeConverter" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The global typeConverter attribute</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="extensionType" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The global extensionType attribute</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="parameterType" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The global parameterType attribute</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="propertyType" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The global propertyType attribute</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="alias" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The global alias attribute</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+</xs:schema>

@@ -1,0 +1,118 @@
+body
+{
+	margin:0px;
+	font-size:12px;
+	color:#FFF;	
+	background-color:#115896;
+    min-width:1080px;
+}
+a{
+	color:#FFF;
+	text-decoration:none;
+}
+#indexTop
+{
+	height:68px;
+	background-image:url(images/menubg.jpg);
+}
+#logo
+{
+	float:left;
+	height:68px;
+	width:200px;	
+	background-image:url(images/Logo.jpg);
+}
+#logoSplit
+{
+	float:left;
+	height:68px;
+	width:8px;
+	background-image:url(images/logoSplit.jpg);
+}
+#mainInfo
+{
+	float:left;
+	margin-left:20px;
+	height:68px;
+}
+#userInfo
+{
+	height:24px;
+	line-height:24px;
+}
+#mainMenu
+{
+	height:44px;
+}
+#mainMenu a
+{
+	color:#0D4264;
+}
+#mainMenu ul,li
+{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+#mainMenu ul
+{
+	float:left;	
+	height:44px;
+}
+#mainMenu li
+{
+	float:left;
+	margin-right:14px;
+	width:88px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	font-weight:bold;
+}
+
+#mainMenu .up
+{
+	background-image:url(images/mainmenuup.jpg);
+}
+
+#mainMenu .over
+{
+	background-image:url(images/mainmenudown.jpg);
+}
+
+#splitLine
+{
+	height:4px;
+	font-size:0px;
+	background-color:#5CB4E6;
+}
+/*****/
+#indexMain
+{
+    width:100%;
+}
+
+#subMenuContainer
+{
+    width:200px;
+}
+#showController
+{
+    width:8px;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-color:#5CB4E6;
+    cursor:pointer;
+}
+.controlShow
+{
+    background-image:url(images/showcontroller.jpg);
+}
+.controlHide
+{
+    background-image:url(images/hidecontroller.jpg);
+}
+#contentContainer
+{
+
+}
