@@ -1,0 +1,189 @@
+﻿@model XoohooViewModelItem<GroupInput>
+@section TitleContent{
+    @Html.SiteTitle("系统管理", "用户管理", "用户组管理", "用户组编辑")
+}
+@section HeadCustom{
+    <style type="text/css">
+        div.status div {
+            float: left;
+            width: 50px;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+            //Tabs
+            $('#tabs').tabs();
+
+            $(":checkbox[@@name='Permissions']").each(function () {
+                $(this).click(function () {
+                    checkedNode(this);
+                });
+            });
+            function checkedNode(self) {
+                var parentID = $(self).attr("parentID");
+                var selfValue = $(self).attr("value");
+                var isChecked = $(self).attr("checked");
+                var childNode = $(":checkbox[parentID='" + selfValue + "']");
+                //如果是不是顶级节点
+                if (parentID) {
+                    //如果当前节点选中，则父节点必须选中,并且子节点必须选中
+                    if (isChecked == true) {
+                        //选中父节点
+                        checkedParentNode(self);
+                        childNode.each(function () {
+                            $(this).attr("checked", "checked");
+                            checkedNode(this);
+                        });
+                    }
+                    else {
+                        childNode.each(function () {
+                            $(this).removeAttr("checked");
+                            checkedNode(this);
+                        });
+                    }
+
+                } else {//如果是顶级节点，将所有子节点的checked设置与当前节点checked值相同
+                    childNode.each(function () {
+                        if (isChecked == true) {
+                            $(this).attr("checked", "checked");
+                        } else {
+                            $(this).removeAttr("checked");
+                        }
+                        checkedNode(this);
+                    });
+                }
+            }
+            function checkedParentNode(self) {
+                var parentID = $(self).attr("parentID");
+                if (parentID) {
+                    var parentNode = $(":checkbox[value='" + parentID + "']");
+                    parentNode.attr("checked", "checked");
+                    checkedParentNode(parentNode);
+                }
+            }
+        });
+    </script>
+}
+
+
+@section NavigationContent
+{
+    当前位置：用户管理 &gt;&gt; 用户组管理 &gt;&gt; 用户组编辑
+}
+@{
+    GroupInput groupInput = Model.Item;
+    var groups = (SelectList)ViewBag.GroupSelectList;
+    var roles = (IEnumerable<RoleBasic>)ViewBag.RoleList;
+    //特定权限
+    var permissions = (IEnumerable<Permission>)ViewBag.PermissionList;
+    bool isEdit = groupInput != null;
+
+    Html.BeginRouteForm("Admin.Membership.User.GroupSave");
+}
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">基本资料</a></li>
+        <li><a href="#tabs-2">特定权限</a></li>
+    </ul>
+    <div id="tabs-1">
+        <table cellpadding="4" cellspacing="0" class="tbl">
+            <tr>
+                <td class="tit">
+                    所属用户组：
+                </td>
+                <td>
+                    @Html.DropDownListFor(groupInput, item => item.ParentID, groups, "-请选择-")
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    用户组名称：
+                </td>
+                <td class="con">
+                    @Html.TextBoxFor(groupInput, item => item.Name, new { @class = "input" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(groupInput, item => item.Name, "请输入用户组名称")
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    允许包含用户：
+                </td>
+                <td class="con">
+                    @Html.CheckBoxFor(groupInput, item => item.IsIncludeUser)
+                    @Html.LabelFor(groupInput, item => item.IsIncludeUser,"允许包含用户")
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    包含角色：
+                </td>
+                <td class="con">
+                    @{
+                        if (!roles.IsNullOrEmpty())
+                        {
+                            foreach (var r in roles)
+                            {
+                                var isChecked = groupInput != null && groupInput.Roles != null && groupInput.Roles.Any(v => v == r.RoleID);
+                                WriteLiteral("{0}&nbsp;{1}<br/>".FormatWith(Html.CheckBoxWithValue("Roles", r.RoleID.ToString(), isChecked), r.Name));
+                            }
+                        }
+                    }
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    限制角色：
+                </td>
+                <td class="con">
+                    @{
+                        if (!roles.IsNullOrEmpty())
+                        {
+                            foreach (var r in roles)
+                            {
+                                var isChecked = groupInput != null && groupInput.LimitRoles != null && groupInput.LimitRoles.Any(v => v == r.RoleID);
+                                WriteLiteral("{0}&nbsp;{1}<br/>".FormatWith(Html.CheckBoxWithValue("LimitRoles", r.RoleID.ToString(), isChecked), r.Name));
+                            }
+                        }
+                    }
+                </td>
+                <td></td>
+            </tr>
+
+        </table>
+    </div>
+    <div id="tabs-2">
+        <table cellpadding="4" cellspacing="0" class="tbl">
+            <tr>
+                <td class="tit">
+                    特定权限：
+                </td>
+                <td>
+                    @{
+                        if (!permissions.IsNullOrEmpty())
+                        {
+                            foreach (var p in permissions)
+                            {
+                                bool isChecked = isEdit && groupInput.Permissions != null && groupInput.Permissions.Any(up => up == p.PermissionID);
+                                WriteLiteral("{0}&nbsp;{1}<br/>".FormatWith(Html.CheckBoxWithValue("Permissions", p.PermissionID.ToString(), isChecked, new { parentID = p.ParentID }), p.Name));
+                            }
+                        }
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="tabsFooter" style="text-align: center">
+        @Html.SkinImageButton("btnSubmit", "Styles/Images/btnSubmit.jpg")
+    </div>
+</div>
+@{
+    Html.EndForm();
+
+}

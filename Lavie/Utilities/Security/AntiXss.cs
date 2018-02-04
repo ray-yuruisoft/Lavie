@@ -2,6 +2,7 @@
 #region Namespaces
 using System;
 using System.Text;
+
 #endregion
 
 #region Namespace - Microsoft.Security.Application

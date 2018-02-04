@@ -1,14 +1,13 @@
-﻿using Lavie.Configuration;
-using Lavie.Configuration.Extensions;
-using Lavie.Extensions;
-using Lavie.Infrastructure.InversionOfControl;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Compilation;
+using Lavie.Configuration;
+using Lavie.Configuration.Extensions;
+using Lavie.Extensions;
+using Lavie.Infrastructure.InversionOfControl;
+using System.Web.Mvc;
 
 namespace Lavie.Infrastructure
 {
@@ -74,7 +73,7 @@ namespace Lavie.Infrastructure
 
             if (moduleInstance == null)
                 throw new NullReferenceException("{0} does not implement the IModule interface.".FormatWith(type));
-
+            
             // 获取模块设置
             moduleInstance.Settings = module.Settings.ToAppSettingsHelper();
 

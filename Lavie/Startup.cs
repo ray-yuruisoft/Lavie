@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lavie.CKFinder;
+﻿using CKSource.CKFinder.Connector.Core.Logs;
+using CKSource.CKFinder.Connector.Logs.NLog;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Owin;
+using System.Configuration;
+using System.Reflection;
+using Lavie.CKFinder;
 
 [assembly: OwinStartup(typeof(Lavie.Startup))]
 namespace Lavie
@@ -24,7 +25,7 @@ namespace Lavie
             /*
             builder.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType = ".Lavie",     // "ApplicationCookie"
+                AuthenticationType = ".LAVIE",     // "ApplicationCookie"
                 AuthenticationMode = AuthenticationMode.Active
             });
             */
@@ -34,4 +35,3 @@ namespace Lavie
         }
     }
 }
-

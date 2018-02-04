@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace Lavie.WarmupStarter
@@ -169,7 +166,7 @@ namespace Lavie.WarmupStarter
                     if (disposing)
                     {
                         // TODO: 释放托管状态(托管对象)。
-                        if (_eventWaitHandle != null)
+                        if(_eventWaitHandle != null)
                         {
                             _eventWaitHandle.Dispose();
                         }

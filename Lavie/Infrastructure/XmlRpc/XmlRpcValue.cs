@@ -1,9 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Lavie.Infrastructure.XmlRpc
@@ -58,12 +56,12 @@ namespace Lavie.Infrastructure.XmlRpc
 
         public double? AsDouble()
         {
-            return ParseScalar("double", e => (double?)double.Parse(e.Value));
+            return ParseScalar("double", e => (double?) double.Parse(e.Value));
         }
 
         public DateTime? AsDateTime()
         {
-            return ParseScalar("dateTime.iso8601", e => (DateTime?)DateTime.ParseExact(e.Value, new[] { "r", "s", "u", "yyyyMMddTHHmmss", "yyyyMMddTHH:mm:ss", "yyyy-MM-ddTHH:mm:ss" }, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
+            return ParseScalar("dateTime.iso8601", e => (DateTime?) DateTime.ParseExact(e.Value, new[] { "r", "s", "u", "yyyyMMddTHHmmss", "yyyyMMddTHH:mm:ss", "yyyy-MM-ddTHH:mm:ss" }, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
         }
 
         public byte[] AsBytes()

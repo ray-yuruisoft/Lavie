@@ -1,14 +1,12 @@
-﻿using Lavie.FilterProviders.FilterCriterion;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
+using Lavie.FilterProviders.FilterCriterion;
 
 namespace Lavie.FilterProviders
 {
-    public class FilterRegistryFilterProvider : IFilterProvider
+    public class FilterRegistryFilterProvider :IFilterProvider
     {
         private readonly List<FilterRegistryItem> _items;
 
@@ -30,7 +28,7 @@ namespace Lavie.FilterProviders
         }
         public void Add(IEnumerable<IFilterCriteria> filterCriteria, object filterInstance)
         {
-            Add(filterCriteria, new Filter(filterInstance, FilterScope.Last, Int32.MaxValue));
+            Add(filterCriteria,  new Filter(filterInstance, FilterScope.Last, Int32.MaxValue));
         }
         public void Add(IEnumerable<IFilterCriteria> filterCriteria, object filterInstance, FilterScope scope, int? order)
         {
@@ -85,14 +83,14 @@ namespace Lavie.FilterProviders
 
         public void Clear()
         {
-            _items.Clear();
+            _items.Clear();            
         }
 
         public IEnumerable<Filter> GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
         {
             var result = from f in _items
-                         where f.Match(controllerContext, actionDescriptor)
-                         select f.Filter;
+                   where f.Match(controllerContext, actionDescriptor)
+                   select f.Filter;
             return result;
         }
     }

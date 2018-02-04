@@ -1,0 +1,308 @@
+﻿@model XoohooViewModelItem<UserInput>
+@section TitleContent{
+    @Html.SiteTitle("系统管理", "人员管理", "人员信息列表", "人员结构分配")
+}
+@section HeadCustom{
+    <style type="text/css">
+        ul.status li {
+            float: left;
+            width: 50px;
+            float: left;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+            //Tabs
+            $('#tabs').tabs();
+
+            $(":checkbox[@@name='Permissions']").each(function () {
+                $(this).click(function () {
+                    checkedNode(this);
+                });
+            });
+
+            function checkedNode(self) {
+                var parentID = $(self).attr("parentID");
+                var selfValue = $(self).attr("value");
+                var isChecked = $(self).attr("checked");
+                var childNode = $(":checkbox[parentID='" + selfValue + "']");
+                //如果是不是顶级节点
+                if (parentID) {
+                    //如果当前节点选中，则父节点必须选中,并且子节点必须选中
+                    if (isChecked == true) {
+                        //选中父节点
+                        checkedParentNode(self);
+                        childNode.each(function () {
+                            $(this).attr("checked", "checked");
+                            checkedNode(this);
+                        });
+                    } else {
+                        childNode.each(function () {
+                            $(this).removeAttr("checked");
+                            checkedNode(this);
+                        });
+                    }
+
+                } else { //如果是顶级节点，将所有子节点的checked设置与当前节点checked值相同
+                    childNode.each(function () {
+                        if (isChecked == true) {
+                            $(this).attr("checked", "checked");
+                        } else {
+                            $(this).removeAttr("checked");
+                        }
+                        checkedNode(this);
+                    });
+                }
+            }
+
+            function checkedParentNode(self) {
+                var parentID = $(self).attr("parentID");
+                if (parentID) {
+                    var parentNode = $(":checkbox[value='" + parentID + "']");
+                    parentNode.attr("checked", "checked");
+                    checkedParentNode(parentNode);
+                }
+            }
+        });
+    </script>
+}
+@section NavigationContent
+{
+    当前位置：用户管理 &gt;&gt; 用户信息管理 &gt;&gt; 用户编辑
+}
+@{
+    string returnUrl = Model.ReturnURL;
+    var groups = (SelectList)ViewBag.GroupSelectList;
+    var status = (SelectList)ViewBag.UserStatusSelectList;
+
+    UserInputAdd userInputAdd = null;
+    UserInputEdit userInputEdit = null;
+    UserInput user = Model.Item;
+    bool isEdit = user != null;
+
+    //特定权限
+    var roles = (SelectList)ViewBag.RoleSelectList;
+    //特定权限
+    var permissions = (IEnumerable<Permission>)ViewBag.PermissionList;
+
+    var inputStyle = new { @class = "input" };
+    var textareaStyle = new { @class = "textarea" };
+
+    Html.BeginRouteForm(isEdit ? "Admin.Membership.User.UserEditSave" : "Admin.Membership.User.UserAddSave");
+}
+@Html.AntiForgeryToken()
+@Html.HiddenFor(user, item => item.UserID)
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">基本资料</a></li>
+        <li><a href="#tabs-2">特定角色</a></li>
+        <li><a href="#tabs-3">特定权限</a></li>
+    </ul>
+    <div id="tabs-1">
+        <table cellpadding="4" cellspacing="0" class="tbl">
+            <tr>
+                <td class="tit">
+                    所属用户组：
+                </td>
+                <td class="con">
+                    @Html.DropDownListFor(user, item => item.GroupID, groups, "-请选择-")
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(user, item => item.GroupID, "请选择用户组")
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    状态：
+                </td>
+                <td class="con">
+                    @Html.RadioButtonListWithValueFor(user, item => item.Status, status, null, new { @class = "status" })
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    用户名：
+                </td>
+                <td class="con">
+                    @Html.TextBoxFor(user, item => item.Username, inputStyle)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(user, item => item.Username, "请输入用户名")
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    昵称：
+                </td>
+                <td class="con">
+                    @Html.TextBoxFor(user, item => item.DisplayName, inputStyle)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(user, item => item.DisplayName, "请输入昵称")
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    真实名称：
+                </td>
+                <td class="con">
+                    @Html.TextBoxFor(user, item => item.RealName, inputStyle)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(user, item => item.RealName, "请输入真实名称")
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    真实名称验证：
+                </td>
+                <td class="con">
+                    @Html.CheckBoxFor(user, item => item.RealNameIsValid)@Html.LabelFor(user, item => item.RealNameIsValid)
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    邮箱：
+                </td>
+                <td class="con">
+                    @Html.TextBoxFor(user, item => item.Email, inputStyle)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(user, item => item.Email, "请输入邮箱")
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    邮箱验证：
+                </td>
+                <td class="con">
+                    @Html.CheckBoxFor(user, item => item.EmailIsValid)@Html.LabelFor(user, item => item.EmailIsValid)
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    手机：
+                </td>
+                <td class="con">
+                    @Html.TextBoxFor(user, item => item.Mobile, inputStyle)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(user, item => item.Mobile, "请输入手机号码")
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    手机验证：
+                </td>
+                <td class="con">
+                    @Html.CheckBoxFor(user, item => item.MobileIsValid)@Html.LabelFor(user, item => item.MobileIsValid)
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    登录密码：
+                </td>
+                <td>
+                    @{
+//其实对于PasswordFor，使用userInputAdd和userInputEdit都可以
+//因为使用UserInputAdd类型和UserInputEdit类型都有Password属性
+                    }
+                    @if (!isEdit)
+                    {
+                        @Html.PasswordFor(userInputAdd, item => item.Password, inputStyle)
+                    }
+                    else
+                    {
+                        @Html.PasswordFor(userInputEdit, item => item.Password, inputStyle)
+                    }
+                </td>
+                <td>
+                    @if (!isEdit)
+                    {
+                        @Html.ValidationMessageFor(userInputAdd, item => item.Password, "请输入登录密码")
+                    }
+                    else
+                    {
+                        @Html.ValidationMessageFor(userInputEdit, item => item.Password, "如果不修改，请保持为空")
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    确认密码：
+                </td>
+                <td>
+                    @if (!isEdit)
+                    {
+                        @Html.PasswordFor(userInputAdd, item => item.PasswordConfirm, inputStyle)
+                    }
+                    else
+                    {
+                        @Html.PasswordFor(userInputEdit, item => item.PasswordConfirm, inputStyle)
+                    }
+                </td>
+                <td>
+                    @if (!isEdit)
+                    {
+                        @Html.ValidationMessageFor(userInputAdd, item => item.PasswordConfirm, "请输入确认密码")
+                    }
+                    else
+                    {
+                        @Html.ValidationMessageFor(userInputEdit, item => item.PasswordConfirm, "如果不修改，请保持为空")
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    描述：
+                </td>
+                <td class="con">
+                    @Html.TextAreaFor(user, item => item.Description, textareaStyle)
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div id="tabs-2">
+        <table cellpadding="4" cellspacing="0" class="tbl">
+            <tr>
+                <td class="tit">
+                    特定角色：
+                </td>
+                <td>
+                    @Html.CheckBoxListWithValueFor(user, item => item.Roles, roles)
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="tabs-3">
+        <table cellpadding="4" cellspacing="0" class="tbl">
+            <tr>
+                <td class="tit">
+                    特定权限：
+                </td>
+                <td>
+                    @{
+                        if (!permissions.IsNullOrEmpty())
+                        {
+                            foreach (var p in permissions)
+                            {
+                                var isChecked = isEdit && user.Permissions.Any(up => up == p.PermissionID);
+                                WriteLiteral("{0}&nbsp;{1}<br/>".FormatWith(Html.CheckBoxWithValue("Permissions", p.PermissionID.ToString(), isChecked, new { parentID = p.ParentID }), p.Name));
+                            }
+                        }
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="tabsFooter" style="text-align: center">
+        @Html.SkinImageButton("btnSubmit", "Styles/Images/btnSubmit.jpg")
+    </div>
+</div>
+@{Html.EndForm();}

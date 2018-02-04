@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lavie.Models
 {
@@ -43,7 +40,7 @@ namespace Lavie.Models
             SortInfo = new SortInfo();
         }
 
-        public PagedList(IEnumerable<T> items) :
+        public PagedList(IEnumerable<T> items): 
             this(items, 0, 0, 0)
         {
         }
@@ -64,4 +61,5 @@ namespace Lavie.Models
         bool IsFirstPage { get; }
         bool IsLastPage { get; }
     }
+
 }

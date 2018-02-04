@@ -1,15 +1,25 @@
-﻿using Lavie.Environment;
-using Lavie.WarmupStarter;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Lavie.ControllerFactories;
+using Lavie.Extensions;
+using Lavie.Infrastructure;
+using Lavie.Infrastructure.InversionOfControl;
+using Lavie.InversionOfControl;
+using Lavie.Models;
+using Lavie.FilterProviders;
+using Lavie.ActionInvokers;
+using Lavie.WarmupStarter;
+using Lavie.Environment;
+using System.Text;
 
 namespace Lavie
 {
-    public class MvcApplication: HttpApplication
+    public class MvcApplication : HttpApplication
     {
         private static Starter<ILavieHost> _starter;
 

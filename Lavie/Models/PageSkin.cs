@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lavie.Models
+﻿namespace Lavie.Models
 {
     public class PageSkin : IPageSkin
     {
@@ -23,8 +17,7 @@ namespace Lavie.Models
 
         public string LinkSeparator { get; private set; }
 
-        public PageSkin()
-        {
+        public PageSkin(){
             LinkFormat = "<a href=\"{0}\">{1}</a>";
             InfoFormat = "第 {0}/{1} 页&nbsp;共 {2} 条&nbsp;每页显示 {3} 条&nbsp;&nbsp;";
             CurrentLinkFormat = "<span class=\"current\">{0}</span>";

@@ -1,11 +1,8 @@
-﻿using Lavie.Utilities.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Lavie.Infrastructure.InversionOfControl;
+using Lavie.Utilities.Exceptions;
 
 namespace Lavie.ControllerFactories
 {
@@ -41,7 +38,7 @@ namespace Lavie.ControllerFactories
                 if (controller != null)
                 {
                     IActionInvoker actionInvoker = _dependencyResolver.GetService<IActionInvoker>();
-                    if (actionInvoker != null)
+                    if(actionInvoker != null)
                         controller.ActionInvoker = actionInvoker;
                 }
                 return iController;

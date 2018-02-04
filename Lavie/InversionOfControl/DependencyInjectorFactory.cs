@@ -1,12 +1,9 @@
-﻿using Lavie.Extensions;
+﻿using System;
+using System.Configuration;
+using System.Web.Mvc;
+using Lavie.Extensions;
 using Lavie.Infrastructure.InversionOfControl;
 using Lavie.InversionOfControl.Unity;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lavie.InversionOfControl
 {

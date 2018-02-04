@@ -1,9 +1,6 @@
-﻿using Lavie.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Lavie.Configuration;
 
 namespace Lavie.Infrastructure
 {
@@ -11,7 +8,7 @@ namespace Lavie.Infrastructure
     {
         void Clear();
         void Add(LavieConfigurationSection config, LavieBackgroundServiceConfigurationElement backgroundService);
-
+       
         IEnumerable<IBackgroundServiceExecutor> GetBackgroundServices();
     }
 }

@@ -1,8 +1,8 @@
 <%@ Control Language="C#" EnableViewState="false" AutoEventWireup="false" Inherits="CKFinder.Settings.ConfigFile" %>
 <%@ Import Namespace="CKFinder.Settings" %>
-<%@ Import Namespace="Xoohoo.Modules.Admin.Services" %>
-<%@ Import Namespace="Xoohoo.Modules.Admin.Models" %>
-<%@ Import Namespace="Xoohoo.Infrastructure" %>
+<%@ Import Namespace="Lavie.Modules.Admin.Services" %>
+<%@ Import Namespace="Lavie.Modules.Admin.Models" %>
+<%@ Import Namespace="Lavie.Infrastructure" %>
 <script runat="server">
     private UserInfo GetUser()
     {

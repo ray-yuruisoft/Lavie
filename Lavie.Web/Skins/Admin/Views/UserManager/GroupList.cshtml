@@ -1,0 +1,97 @@
+﻿@model XoohooViewModelItem<IEnumerable<Group>>
+@section TitleContent{
+    @Html.SiteTitle("系统管理", "用户管理", "用户组管理", "用户组列表")
+}
+@section HeadCustom{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $(".delete>a").click(function () {
+                if (!confirm("警告！删除该用户组后，该用户组下的用户将自动移入\"等待分配组！\n确定要删除该用户组？")) { return false; }
+            });
+        });
+    </script>
+}
+@section NavigationContent
+{
+    当前位置：用户管理 &gt;&gt; 用户组管理 &gt;&gt; 用户组列表
+}
+@{
+    IEnumerable<Group> groups = Model.Item;
+    Html.BeginRouteForm("Admin.Membership.User.GroupList", FormMethod.Post, new { @id = "GroupSearchForm", @name = "GroupSearchForm" });
+    var list = groups as Group[] ?? groups.ToArray();
+    if (!list.IsNullOrEmpty())
+    {
+        int maxDisplayOrder = list.Max(v => v.DisplayOrder);
+        var grid = new WebGrid(list, canSort: false, canPage: false);
+        @grid.GetHtml(
+            columns: grid.Columns(
+                grid.Column("DisplayOrder", "顺序", null, "conNum"),
+                grid.Column("AddSub", "添加子组", col =>
+                {
+                    var item = (Group)col.Value;
+                    return Html.ActionLink("添加子组", "GroupAdd", new { ParentID = item.GroupID });
+                }
+                , "conCtr2"),
+                grid.Column("Up", " ", col =>
+                {
+                    var item = (Group)col.Value;
+                    return item.DisplayOrder <= 3 ? MvcHtmlString.Empty : Html.ActionLink("上移", "GroupMove", new { GroupID = item.GroupID, Target = MovingTarget.Up });
+                }
+
+                , "conCtr"),
+                grid.Column("Down", " ", col =>
+                {
+                    var item = (Group)col.Value;
+                    return item.DisplayOrder < 3 || item.DisplayOrder == maxDisplayOrder ? MvcHtmlString.Empty : Html.ActionLink("下移", "GroupMove", new { GroupID = item.GroupID, Target = MovingTarget.Down });
+                }
+                , "conCtr"),
+                grid.Column("Edit", " ", col =>
+                {
+                    var item = (Group)col.Value;
+                    return Html.ActionLink("编辑", "GroupEdit", new { GroupID = item.GroupID });
+                }
+                , "conCtr"),
+                grid.Column("Name", "用户组名称", col =>
+                {
+                    var item = (Group)col.Value;
+                    return item.IsSystem ? new MvcHtmlString(item.Name) : Html.ActionLink(item.Name, "GroupEdit", new { GroupID = item.GroupID });
+                }
+                , "conOth"),
+                grid.Column("Name", "限制角色", col =>
+                {
+                    var item = (Group)col.Value;
+                    return String.Join(" ", item.LimitRoles.Select(m => m.Name));
+                }
+                , "conOth"),
+                grid.Column("IsIncludeUser", "允许包含用户", col =>
+                {
+                    var item = (Group)col.Value;
+                    return item.IsIncludeUser ? "√" : "";
+                }
+                , "con60"),
+
+
+                grid.Column("SiteConfig", " ", col =>
+                {
+                    var item = (Group)col.Value;
+                    return Html.ActionLink("站点配置", "SiteConfig", new { GroupID = item.GroupID });
+                }
+                , "conCtr"),
+
+                grid.Column("Delete", " ", col =>
+                {
+                    var item = (Group)col.Value;
+                    return Html.ActionLink("删除", "GroupRemove", new { GroupID = item.GroupID });
+                }
+                , "conCtr delete"),
+
+                grid.Column("IsSystem", "系统", null, "conCtr")
+            ),
+            tableStyle: "tbl",
+            headerStyle: "rowhead",
+            rowStyle: "",
+            alternatingRowStyle: "rowodd"
+            );
+    }
+}
+@{Html.EndForm();}

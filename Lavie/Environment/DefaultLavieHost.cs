@@ -1,18 +1,15 @@
-﻿using Lavie.Extensions;
-using Lavie.Infrastructure;
-using Lavie.Infrastructure.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Lavie.Extensions;
+using Lavie.Infrastructure;
+using System.Collections.Generic;
 
 namespace Lavie.Environment
 {
-    public class DefaultLavieHost : ILavieHost
+    public class DefaultLavieHost:ILavieHost
     {
         #region IHost 成员
 
@@ -43,7 +40,7 @@ namespace Lavie.Environment
 
         #endregion
 
-        protected virtual void Initialize(HttpApplication application)
+        protected virtual void Initialize(HttpApplication application) 
         {
             // 启动所有引导程序
             foreach (IBootStrapperTask task in DependencyResolver.Current.GetServices<IBootStrapperTask>())
@@ -94,8 +91,8 @@ namespace Lavie.Environment
                 requestContext.HttpContext.Items[typeof(RequestContext).FullName] = requestContext;
             }
         }
-        protected virtual void EndRequest(HttpApplication application)
-        {
+        protected virtual void EndRequest(HttpApplication application) 
+        { 
         }
 
     }

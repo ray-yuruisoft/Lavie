@@ -1,11 +1,10 @@
-﻿using Lavie.Models;
-using Lavie.Utilities.Exceptions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Lavie.Models;
+using Lavie.Utilities.Exceptions;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Lavie.Extensions
@@ -83,7 +82,7 @@ namespace Lavie.Extensions
         /// <param name="pagingInfo">分页信息</param>
         /// <param name="topQuery">跳过记录集</param>
         /// <returns></returns>
-        public static async Task<PagedList<T>> GetPagedListAsync<T>(this IQueryable<T> sourceQuery, PagingInfo pagingInfo, IEnumerable<T> topQuery = null) where T : class
+        public static async Task<PagedList<T>> GetPagedListAsync<T>(this IQueryable<T> sourceQuery, PagingInfo pagingInfo, IEnumerable<T> topQuery = null) where T: class
         {
             Guard.ArgumentNotNull(sourceQuery, "sourceQuery");
 

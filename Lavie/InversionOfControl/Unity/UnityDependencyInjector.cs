@@ -1,24 +1,23 @@
-﻿using Lavie.Configuration;
-using Lavie.Environment;
-using Lavie.FilterProviders;
-using Lavie.Infrastructure;
-using Lavie.Infrastructure.InversionOfControl;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Unity;
-using Lavie.Utilities.Exceptions;
-using Lavie.BootStrapperTask;
-using System.Web;
-using Lavie.Infrastructure.Modules;
-using Unity.Lifetime;
+using Lavie.BootStrapperTasks;
+using Lavie.Configuration;
+using Lavie.FilterProviders;
+using Lavie.Infrastructure;
+using Lavie.Infrastructure.InversionOfControl;
 using Lavie.Models;
+using XM = Lavie.Models;
+using Lavie.Utilities.Exceptions;
+using Lavie.Environment;
+using Unity;
+using Unity.Lifetime;
 using Microsoft.Practices.Unity.Configuration;
 
 namespace Lavie.InversionOfControl.Unity
@@ -129,7 +128,7 @@ namespace Lavie.InversionOfControl.Unity
             return childContainer;
         }
 
-        public IDependencyInjector RegisterInstance<T>(T instance) where T : class
+        public IDependencyInjector RegisterInstance<T>(T instance) where T:class
         {
             Guard.ArgumentNotNull(instance, "instance");
 
@@ -137,7 +136,7 @@ namespace Lavie.InversionOfControl.Unity
             return this;
         }
 
-        public IDependencyInjector RegisterInstance<TFrom, TTo>() where TTo : class, TFrom
+        public IDependencyInjector RegisterInstance<TFrom, TTo>() where TTo :class, TFrom
         {
             return RegisterInstance(typeof(TFrom), typeof(TTo));
         }
@@ -151,7 +150,7 @@ namespace Lavie.InversionOfControl.Unity
             return this;
         }
 
-        public IDependencyInjector RegisterType<TFrom, TTo>() where TTo : class, TFrom
+        public IDependencyInjector RegisterType<TFrom, TTo>() where TTo :class, TFrom
         {
             _innerContainer.RegisterType<TFrom, TTo>();
             return this;

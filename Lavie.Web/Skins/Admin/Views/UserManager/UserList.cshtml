@@ -1,0 +1,194 @@
+﻿@model XoohooViewModelItem<IPagedList<UserInfo>>
+@section TitleContent{
+    @Html.SiteTitle("系统管理", "用户管理", "用户信息管理", "用户信息列表")
+}
+@section HeadCustom{
+    <style type="text/css">
+        ul, li
+        {
+            padding: 0px;
+            margin: 0px;
+            list-style-type: none;
+        }
+        .control
+        {
+            cursor: pointer;
+        }
+        .controlMenu
+        {
+            cursor: pointer;
+            color: #fff;
+            background-color: #596162;
+            border: 1px solid #373D3E;
+            position: absolute;
+            display: none;
+        }
+        .controlMenu li
+        {
+            line-height: 20px;
+            text-align: center;
+        }
+        .controlMenu .over
+        {
+            background-color: #4D5455;
+            color: #cccccc;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $(".delete>a").click(function () {
+                if (!confirm("确定要删除该用户？")) { return false; }
+            });
+
+            // 状态选择
+
+            $("ul.controlMenu").bind("mouseleave", function () {
+                $(this).hide();
+            });
+            $("ul.controlMenu li").hover(function () {
+                $(this).addClass("over");
+            }, function () {
+                $(this).removeClass("over");
+            }
+        );
+            $("ul.controlMenu li").click(function () {
+                action($(this).attr("command"), currentController.attr("value"), $(this).attr("v"), $(this).text());
+                $(this).parent().hide();
+            });
+
+
+            var controlMenu = $("ul.controlMenu");
+            var currentController;
+            $("a.controller").click(function () {
+                var parent = $(this).parent();
+                controlMenu.css("top", parent.offset().top + 'px');
+                controlMenu.css("left", parent.offset().left + 'px');
+                controlMenu.width(parent.width());
+                controlMenu.show();
+                currentController = $(this);
+            });
+
+            // 单条命令调用
+            var cmdRootPath = '@Url.RouteUrl("Admin.Project.UserManager.UserList")';
+            function action(command, id, value, text) {
+                var url = "{0}/{1}/{2}/{3}?".format(cmdRootPath, command, id, value);
+                $.getJSON(url, { r: (new Date()).getTime() }, function (data) {
+                    if (data.Result) {
+                        if (currentController) {
+                            currentController.text(text);
+                        }
+                    } else {
+                        alert("修改用户状态失败！");
+                    }
+
+                });
+                //window.location = url;
+
+            }
+
+        });
+    </script>
+}
+@section NavigationContent
+{
+当前位置：人员管理 &gt;&gt; 人员信息管理 &gt;&gt; 人员信息列表
+}
+@{
+    IPagedList<UserInfo> users = Model.Item;
+    var criteria = (UserSearchCriteria)ViewBag.UserSearchCriteria;
+    var groups = (SelectList)ViewBag.GroupSelectList;
+    var status = (List<SelectListItem>)ViewBag.UserStatusSelectList;
+    var pageSize = (SelectList)ViewBag.PageSizeSelectList;
+
+    var routeValues = new RouteValueDictionary(criteria);
+    routeValues.Add("PageSize", users.PageSize);
+    routeValues.Add("PageNumber", users.PageNumber);
+    //用于分页跳转 ///
+    string currentUrl = Url.RouteUrl("Admin.Project.UserManager.UserList", routeValues);
+    //用于显示全部
+    string defaultUrl = Url.RouteUrl("Admin.Project.UserManager.UserList");
+
+    //如果采用路由规则中的配置，BeginRouteForm的routeValues可以设为null
+    Html.BeginRouteForm("Admin.Project.UserManager.UserList", null, FormMethod.Post, new { @id = "UserSearchForm", @name = "UserSearchForm" });
+}
+<table cellpadding="4" cellspacing="0" class="tbl">
+    <tr>
+        <td class="tit80">
+            查找用户：
+        </td>
+        <td>
+            @Html.TextBoxFor(criteria, m => m.Keyword, new { @class = "input80 valignmiddle" })
+            @Html.DropDownListFor(criteria, m => m.GroupID, groups, "-用户组-", new { @class = "valignmiddle" })
+            @Html.DropDownListFor(criteria, m => m.Status, status, "-状态-", new { @class = "valignmiddle" })
+            @Html.DropDownListFor(users, m => m.PageSize, pageSize, new { @class = "valignmiddle" })
+            第
+            @Html.TextBoxFor(users, m => m.PageNumber, new { @class = "input20 valignmiddle" })
+            页
+            @Html.SkinImageButton("btnSearch", "Styles/Images/btnSearch.jpg", new { @class = "valignmiddle" })
+            <a href="@defaultUrl">
+                @Html.SkinImage("Styles/Images/btnViewAll.jpg", "", new { @class = "valignmiddle" })</a>
+        </td>
+    </tr>
+</table>
+@{Html.EndForm();}
+@if (!users.IsNullOrEmpty())
+{
+    var grid = new WebGrid(users, canSort: false, canPage: false);
+    @grid.GetHtml(
+        columns: grid.Columns(
+            grid.Column("UserID", "ID", null, "conNum"),
+            grid.Column("Username", "用户名", col =>
+            {
+                var item = (UserInfo)col.Value;
+                return Html.ActionLink(item.Username, "UserAddOrEdit", new { UserID = item.UserID });
+            }
+            , "con80"),
+            grid.Column("DisplayName", "昵称", null, "con80"),
+            grid.Column("Group.Name", "所属用户组", null, "con100"),
+            grid.Column("Email", "邮箱", null, "conOth"),
+            grid.Column("Mobile", "手机号码", null, "conOth"),
+            grid.Column("CreationDate", "创建日期", null, "con120"),
+            grid.Column("Status", "状态", col =>
+            {
+                var item = (UserInfo)col.Value;
+                return Html.Link(item.Status.GetEnumDisplayName(), "javascript:void(0);", new { @value = item.UserID, @class = "controller" });
+            }, "conCtr"),
+            grid.Column("Edit", " ", col =>
+            {
+                var item = (UserInfo)col.Value;
+                return Html.ActionLink("编辑", "UserAddOrEdit", new { UserID = item.UserID, ReturnURL = currentUrl });
+            }, "conCtr"),
+            grid.Column("Distribute", " ", col =>
+            {
+                var item = (UserInfo)col.Value;
+                return Html.ActionLink("机构分配", "Distribute", new { UserID = item.UserID, ReturnURL = currentUrl });
+            }, "conCtr"),
+            grid.Column("Delete", " ", col =>
+            {
+                var item = (UserInfo)col.Value;
+                return Html.ActionLink("删除", "UserRemove", new { UserID = item.UserID, ReturnURL = currentUrl });
+            }, "conCtr delete")
+            ),
+        tableStyle: "tbl",
+        headerStyle: "rowhead",
+        rowStyle: "",
+        alternatingRowStyle: "rowodd"
+        );
+
+}
+@if (!users.IsNullOrEmpty())
+{
+    <div class="pager">
+        @Html.Paging(users.PageSize, users.PageNumber, users.TotalItemCount, "UserList", criteria)
+        <form action="@currentUrl" id="GotoPageForm" method="post">
+        跳转至页：@Html.TextBox("PageNumber", users.PageNumber, new { @class = "input20 valignmiddle" })
+        @Html.SkinImageButton("btnGo", "Styles/Images/btnGo.jpg", new { @class = "valignmiddle" })
+        </form>
+    </div>
+}
+<ul class="controlMenu">
+    @foreach (var item in status)
+    {
+        WriteLiteral("<li v=\"{0}\" command=\"ChangeStatus\">{1}</li>".FormatWith(item.Value, item.Text));
+    }
+</ul>

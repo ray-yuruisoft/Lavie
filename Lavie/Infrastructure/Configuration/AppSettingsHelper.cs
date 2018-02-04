@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Lavie.Infrastructure
 {
@@ -62,7 +58,7 @@ namespace Lavie.Infrastructure
         {
             return GetStringArray(name, separator, false, defaultValue);
         }
-
+       
         private string[] GetStringArray(string name, string separator, bool valueRequired, string[] defaultValue)
         {
             string value = GetValue(name, valueRequired);
@@ -144,7 +140,7 @@ namespace Lavie.Infrastructure
         #endregion
 
         #region Private Methods
-
+      
         private delegate bool Parser<T1, T2, TResult>(T1 t1, out T2 t2);
         private T GetValue<T>(string name, Parser<string, T, bool> parseValue, T? defaultValue) where T : struct
         {

@@ -1,15 +1,14 @@
-﻿using Lavie.Configuration;
-using Lavie.Configuration.Extensions;
-using Lavie.Extensions;
-using Lavie.Utilities.Exceptions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Compilation;
+using Lavie.Configuration;
+using Lavie.Configuration.Extensions;
+using Lavie.Extensions;
+using Lavie.Infrastructure.InversionOfControl;
 using System.Web.Mvc;
+using Lavie.Utilities.Exceptions;
 
 namespace Lavie.Infrastructure
 {

@@ -1,0 +1,109 @@
+﻿@model XoohooViewModelItem<RoleInput>
+@section TitleContent{
+    @Html.SiteTitle("系统管理", "用户管理", "角色管理", "角色编辑")
+}
+@section HeadCustom{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $(":checkbox[@@name='Permissions']").each(function () {
+                $(this).click(function () {
+                    checkedNode(this);
+                });
+            });
+            function checkedNode(self) {
+                var parentID = $(self).attr("parentID");
+                var selfValue = $(self).attr("value");
+                var isChecked = $(self).attr("checked");
+                var childNode = $(":checkbox[parentID='" + selfValue + "']");
+                //如果是不是顶级节点
+                if (parentID) {
+                    //如果当前节点选中，则父节点必须选中,并且子节点必须选中
+                    if (isChecked == true) {
+                        //选中父节点
+                        checkedParentNode(self);
+                        childNode.each(function () {
+                            $(this).attr("checked", "checked");
+                            checkedNode(this);
+                        });
+                    }
+                    else {
+                        childNode.each(function () {
+                            $(this).removeAttr("checked");
+                            checkedNode(this);
+                        });
+                    }
+
+                } else {//如果是顶级节点，将所有子节点的checked设置与当前节点checked值相同
+                    childNode.each(function () {
+                        if (isChecked == true) {
+                            $(this).attr("checked", "checked");
+                        } else {
+                            $(this).removeAttr("checked");
+                        }
+                        checkedNode(this);
+                    });
+                }
+            }
+            function checkedParentNode(self) {
+                var parentID = $(self).attr("parentID");
+                if (parentID) {
+                    var parentNode = $(":checkbox[value='" + parentID + "']");
+                    parentNode.attr("checked", "checked");
+                    checkedParentNode(parentNode);
+                }
+            }
+        });
+
+    </script>
+}
+@section NavigationContent
+{
+    当前位置：用户管理 &gt;&gt; 角色管理 &gt;&gt; 角色编辑
+}
+@{
+    RoleInput roleInput = Model.Item;
+    var permissions = (IEnumerable<Permission>)ViewBag.PermissionList;
+    Html.BeginRouteForm("Admin.Membership.User.RoleSave");
+}
+    <table cellpadding="4" cellspacing="0" class="tbl">
+        <tr>
+            <td class="tit">
+                角色名称：
+            </td>
+            <td class="con">
+                @Html.TextBoxFor(roleInput, item=>item.Name, new { @class = "input" })
+            </td>
+            <td>
+                @Html.ValidationMessageFor(roleInput, item => item.Name, "请输入角色名称")
+            </td>
+        </tr>
+        <tr>
+            <td class="tit">
+                拥有权限：
+            </td>
+            <td class="con">
+            @{
+                if (!permissions.IsNullOrEmpty())
+                {
+                    foreach (var p in permissions)
+                    {
+                        var isChecked = roleInput != null && roleInput.Permissions.Any(v => v == p.PermissionID);
+                        WriteLiteral("{0}&nbsp;{1}<br/>".FormatWith(Html.CheckBoxWithValue("Permissions", p.PermissionID.ToString(), isChecked, new { parentID = p.ParentID }), p.Name));
+                    }
+                }
+                }
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td class="tit">
+            </td>
+            <td>
+                @Html.SkinImageButton("btnSubmit", "btnSubmit", "Styles/Images/btnSubmit.jpg")
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
+@{Html.EndForm();}

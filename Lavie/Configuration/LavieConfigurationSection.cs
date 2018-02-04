@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 
 namespace Lavie.Configuration
 {
+    /// <summary>
+    /// Lavie自定义配置节点
+    /// </summary>
     public class LavieConfigurationSection : ConfigurationSection
     {
         /// <summary>

@@ -1,0 +1,165 @@
+﻿@model XoohooViewModelItem<UserInput>
+
+@section HeadCustom{
+    <style type="text/css">
+        ul.status li {
+            float: left;
+            width: 50px;
+            float: left;
+        }
+    </style>
+
+    <script language="javascript">
+
+        function AddElement(mytype) {
+            var temp = $("input:hidden[name='inputNum']").val();
+            if (mytype == 'text' && temp < 4) {
+                temp++;
+                $("input:hidden[name='inputNum']").val(temp);
+            } else return;
+            var mytype, TemO = document.getElementById("add");
+            var newInput = document.createElement("input");
+            var textNode = document.createTextNode("");
+            if (temp == 2) {
+                textNode.nodeValue = "3天-5天"; 
+            }
+            else if (temp == 3) {
+                textNode.nodeValue = "5天-10天"; 
+            }
+            else if (temp == 4) {
+                textNode.nodeValue = "10天以上"; 
+            }
+            newInput.type = mytype;           
+            newInput.name = "input" + temp;
+
+            TemO.appendChild(textNode);
+            TemO.appendChild(newInput);
+            var newline = document.createElement("br");
+            TemO.appendChild(newline);
+        }
+
+        function RemoveElement() {
+            var TemO = document.getElementById("add");
+            TemO.removeChild();
+        }
+
+
+    </script>
+}
+@section NavigationContent
+{
+    当前位置：用户管理 &gt;&gt; 用户信息管理 &gt;&gt; 用户编辑
+}
+@Html.AntiForgeryToken()
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">请假流转配置</a></li>
+        <li><a href="#tabs-2">特定角色</a></li>
+        <li><a href="#tabs-3">特定权限</a></li>
+    </ul>
+    <div id="tabs-1">
+        <form action="/Manager/Project/UserManager/SiteConfigAdd" method="post" name="frm">
+            <div id="add">
+                <input type="hidden" name="inputNum" value=1 />
+                <text  name="dayNum">3天以下</text>
+                <input type="text" name="input1">
+            </div>
+            <button type="submit">提交</button>
+        </form>
+        <input name="" type="button" value="新建文本框" onClick="AddElement('text')" />
+        <input name="" type="button" value="新建复选框" onClick="AddElement('checkbox')" />
+        <input name="" type="button" value="新建单选框" onClick="AddElement('radio')" />
+        <input name="" type="button" value="新建文件域" onClick="AddElement('file')" />
+        <input name="" type="button" value="新建密码框" onClick="AddElement('password')" />
+        <input name="" type="button" value="新建提交按钮" onClick="AddElement('submit')" />
+        <input name="" type="button" value="新建恢复按钮" onClick="AddElement('reset')" />
+
+        <table cellpadding="4" cellspacing="0" class="tbl">
+            <tr>
+                <td class="tit">
+                    用户名：
+                </td>
+                <td class="con"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    昵称：
+                </td>
+                <td class="con"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    真实名称：
+                </td>
+                <td class="con"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    真实名称验证：
+                </td>
+                <td class="con"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    邮箱：
+                </td>
+                <td class="con"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    邮箱验证：
+                </td>
+                <td class="con"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    手机：
+                </td>
+                <td class="con"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    手机验证：
+                </td>
+                <td class="con"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="tit">
+                    登录密码：
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="tabs-2">
+        <table cellpadding="4" cellspacing="0" class="tbl">
+            <tr>
+                <td class="tit">
+                    特定角色：
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div id="tabs-3">
+        <table cellpadding="4" cellspacing="0" class="tbl">
+            <tr>
+                <td class="tit">
+                    特定权限：
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div id="tabsFooter" style="text-align: center">
+        @Html.SkinImageButton("btnSubmit", "Styles/Images/btnSubmit.jpg")
+    </div>
+</div>
+@{Html.EndForm();}

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Lavie.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sky123.Org")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Lavie.Web")]
-[assembly: AssemblyCopyright("Copyright © Sky123.Org 2018")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
-[assembly: Guid("5080ea09-ab49-4eaf-93ed-83319a503e4d")]
+[assembly: Guid("83d194f6-aeac-41d4-bd68-64213bd51a0f")]
 
 // 程序集的版本信息由下列四个值组成:
 //

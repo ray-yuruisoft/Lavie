@@ -1,16 +1,20 @@
-﻿using CKSource.CKFinder.Connector.Core.Acl;
-using CKSource.CKFinder.Connector.Core.Builders;
-using CKSource.CKFinder.Connector.Host.Owin;
-using Owin;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
+using System.Configuration;
+
 using CKSource.CKFinder.Connector.Core;
-using CKSource.CKFinder.Connector.Core.ResizedImages;
+using CKSource.CKFinder.Connector.Config;
+using CKSource.CKFinder.Connector.Core.Builders;
+using CKSource.CKFinder.Connector.Host.Owin;
 using CKSource.FileSystem.Local;
+using Owin;
+using CKSource.CKFinder.Connector.Core.Acl;
+using CKSource.CKFinder.Connector.Core.ResizedImages;
+using System.Drawing;
+using CKSource.CKFinder.Connector.Core.KeyValueStores;
 
 namespace Lavie.CKFinder
 {
@@ -22,9 +26,9 @@ namespace Lavie.CKFinder
             var connector = connectorBuilder
                 .SetAuthenticator(new GeneralAuthenticator())
                 .SetLicense("192.168.0.104", "QVUVC69BEDVXTFMRYAEKJI2DN0DAJ") // VEA2VFXJ6NA
-                                                                              //.LoadConfig()
-                                                                              //.SetVerboseLogging(true)
-                                                                              //.SetCsrfProtection(true)
+                //.LoadConfig()
+                //.SetVerboseLogging(true)
+                //.SetCsrfProtection(true)
                 .SetRequestConfiguration(
                     (request, config) =>
                     {

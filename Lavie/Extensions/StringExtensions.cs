@@ -1,15 +1,14 @@
-﻿using Lavie.Utilities.Exceptions;
-using Microsoft.International.Converters.PinYinConverter;
-using Microsoft.Security.Application;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Security.Application;
+using Lavie.Utilities.Exceptions;
+using Microsoft.International.Converters.PinYinConverter;
 
 namespace Lavie.Extensions
 {
@@ -32,7 +31,7 @@ namespace Lavie.Extensions
         /// <returns></returns>
         public static bool IsGuid(this string source)
         {
-            return !source.IsNullOrWhiteSpace() && GuidRegex.IsMatch(source);
+            return !source.IsNullOrWhiteSpace() && GuidRegex.IsMatch(source);            
         }
         /// <summary>
         /// 字符串转换为Guid
@@ -84,7 +83,7 @@ namespace Lavie.Extensions
         /// <param name="source">源字符串</param>
         /// <param name="exceptionPattern">要排除的标签</param>
         /// <returns></returns>
-        public static string CleanHtmlTags(this string source, string exceptionPattern = null)
+        public static string CleanHtmlTags(this string source, string exceptionPattern=null)
         {
             if (!string.IsNullOrEmpty(exceptionPattern))
                 return
@@ -213,7 +212,7 @@ namespace Lavie.Extensions
             return !filePath.IsNullOrWhiteSpace()
                 && File.Exists(filePath)
                 && (File.GetAttributes(filePath) & FileAttributes.ReadOnly) != FileAttributes.ReadOnly;
-            //&& SecurityManager.IsGranted(new FileIOPermission(FileIOPermissionAccess.Write, filePath));
+                //&& SecurityManager.IsGranted(new FileIOPermission(FileIOPermissionAccess.Write, filePath));
 
         }
         public static bool IsFileWritable(this string virtualPath, HttpContextBase httpContext)
@@ -360,7 +359,7 @@ namespace Lavie.Extensions
         /// <returns><c>true</c>是子目录；<c>false</c>不是子目录</returns>
         public static bool IsSubDirectory(this string path)
         {
-            return !path.IsNullOrWhiteSpace() && SubDirectoryRegex.IsMatch(path);
+            return !path.IsNullOrWhiteSpace() && SubDirectoryRegex.IsMatch(path); 
         }
 
         /// <summary>
@@ -430,7 +429,7 @@ namespace Lavie.Extensions
         /// </summary>
         /// <param name="source">源对象</param>
         /// <returns>字符串</returns>
-        public static string ToNullableString<T>(this T source) where T : class
+        public static string ToNullableString<T>(this T source) where T:class
         {
             return source == null ? null : source.ToString();
         }
@@ -438,12 +437,12 @@ namespace Lavie.Extensions
         {
             return source == null ? null : source.ToString();
         }
-        public static string WithUrl(this string source, string url)
+        public static string WithUrl(this string source,string url)
         {
             if (source == null)
                 return null;
 
-            return String.Format("<a href=\"{0}\">{1}</a>", url, source);
+            return String.Format("<a href=\"{0}\">{1}</a>",url,source);
         }
 
         #region 拼音
